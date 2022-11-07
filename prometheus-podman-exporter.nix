@@ -27,7 +27,7 @@ buildGoModule rec {
     inherit (src.meta) homepage;
     description = "A Prometheus exporter for podman environments";
     license = licenses.asl20;
-    maintainers = with maintainers; [ mfenniak ];
+    # maintainers = with maintainers; [ mfenniak ];
     platforms = platforms.linux;
   };
 }
