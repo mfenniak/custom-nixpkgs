@@ -1,4 +1,17 @@
-{ lib, stdenv, buildGoModule, fetchFromGitHub, nixosTests, btrfs-progs, pkg-config, gpgme, lvm2, conmon, makeWrapper }:
+{ lib
+, stdenv
+, buildGoModule
+, fetchFromGitHub
+, nixosTests
+, btrfs-progs
+, pkg-config
+, gpgme
+, lvm2
+, runc # Default container runtime
+, crun # Container runtime (default with cgroups v2 for podman/buildah)
+, conmon # Container runtime monitor
+, makeWrapper
+}:
 
 buildGoModule rec {
   pname = "prometheus-podman-exporter";
@@ -20,7 +33,7 @@ buildGoModule rec {
 
   postInstall = ''
     wrapProgram $out/bin/${pname} \
-      --prefix PATH : ${lib.makeBinPath [ conmon ]}
+      --prefix PATH : ${lib.makeBinPath [ runc crun conmon ]}
   '';
 
   meta = with lib; {
