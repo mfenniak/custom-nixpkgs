@@ -7,6 +7,7 @@ let
 
   self = {
     csv-to-clipboard = callPackage ./csv-to-clipboard.nix {};
+    prometheus-podman-exporter = callPackage ./podman-exporter.nix {};
   };
 in
 self
