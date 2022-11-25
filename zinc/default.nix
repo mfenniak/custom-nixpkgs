@@ -5,7 +5,7 @@ let
     CYPRESS_INSTALL_BINARY = "0";
   });
 in
-stdenv.mkDerivation rec {
+buildGoModule rec {
   pname = "zinc";
   version = "0.3.5";
 
@@ -20,11 +20,11 @@ stdenv.mkDerivation rec {
   #   git clone zinc
   #   cd zinc/web
   #   node2nix -l ./package-lock.json -d
-  #   cp *.nix ~/Dev/custom-nixpkgs/zinc/web/ 
+  #   cp *.nix ~/Dev/custom-nixpkgs/zinc/web/
   web = stdenv.mkDerivation {
     pname = "${pname}-web";
     inherit src version;
-    buildInputs = [pkgs.nodejs];  # FIXME: nodejs pin version?
+    buildInputs = [pkgs.nodejs-18_x];
     buildPhase = ''
       cd web
       export PATH="${nodeDependencies}/bin:$PATH"
@@ -36,50 +36,35 @@ stdenv.mkDerivation rec {
     '';
   };
 
-  app = buildGoModule {
-    pname = "${pname}-app";
-    inherit src version;
-    vendorSha256 = "sha256-akjb0cxHbITKS26c+7lVSHWO/KRoQVVKzAOra+tdAD8=";
-    preBuild = ''
-      # (can't symlink; "can't embed irregular file")
-      cp -rf ${web} web/dist
-    '';
-    buildPhase = ''
-      runHook preBuild
-      go build \
-        -o zinc \
-        -ldflags="-s -w -X github.com/zinclabs/zinc/pkg/meta.Version=${version} -X github.com/zinclabs/zinc/pkg/meta.CommitHash=${src.rev} -X github.com/zinclabs/zinc/pkg/meta.BuildDate=19691231" \
-        cmd/zinc/main.go
-      runHook postInstall
-    '';
+  vendorSha256 = "sha256-akjb0cxHbITKS26c+7lVSHWO/KRoQVVKzAOra+tdAD8=";
+  preBuild = ''
+    # (can't symlink; "can't embed irregular file")
+    cp -rf ${web} web/dist
+  '';
+  buildPhase = ''
+    runHook preBuild
+    go build \
+      -o zinc \
+      -ldflags="-s -w -X github.com/zinclabs/zinc/pkg/meta.Version=${version} -X github.com/zinclabs/zinc/pkg/meta.CommitHash=${src.rev} -X github.com/zinclabs/zinc/pkg/meta.BuildDate=19691231" \
+      cmd/zinc/main.go
+    runHook postInstall
+  '';
 
-    # FIXME;
-    # FAIL
-    # FAIL    github.com/zinclabs/zinc/pkg/core       23.019s
-    # FAIL
-    # preCheck = ''
-    #   export ZINC_FIRST_ADMIN_USER=admin
-    #   export ZINC_FIRST_ADMIN_PASSWORD=Complexpass#123
-    # '';
-    doCheck = false;
+  preCheck = ''
+    export ZINC_FIRST_ADMIN_USER=admin
+    export ZINC_FIRST_ADMIN_PASSWORD=Complexpass#123
+  '';
 
-    installPhase = ''
-      mkdir -p $out/bin
-      cp zinc $out/bin/
-    '';
-  };
-
-  buildInputs = [ app ];
   installPhase = ''
     mkdir -p $out/bin
-    cp ${app}/bin/zinc $out/bin/
+    cp zinc $out/bin/
   '';
 
   meta = with lib; {
     inherit (src.meta) homepage;
     description = "ZincSearch - A lightweight alternative to elasticsearch that requires minimal resources";
     license = licenses.asl20;
-    # platforms = platforms.linux; # FIXME: correct platforms?
-    # FIXME: maintainers?
+    maintainers = with maintainers; [ mfenniak ];
+    platforms = platforms.linux;
   };
 }
