@@ -1,11 +1,15 @@
 {
   description = "csv-to-clipboard nix flake";
 
+  inputs = {
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+  };
+
   outputs = { self, nixpkgs }: {
 
     # packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
 
-    packages.x86_64-linux.default =
+    packages.x86_64-linux.csv-to-clipboard =
       with import nixpkgs { system = "x86_64-linux"; };
       let
         desktopFile = pkgs.makeDesktopItem {
@@ -41,5 +45,10 @@
           substituteAll ${desktopFile}/share/applications/csv-to-clipboard.desktop $out/share/applications/csv-to-clipboard.desktop
         '';
       };
+
+    # overlays.default = final: prev: rec {
+    #   csv-to-clipboard = final.callPackage ../csv-to-clipboard.nix; # self.packages.x86_64-linux.csv-to-clipboard;
+    # };
+
   };
 }
