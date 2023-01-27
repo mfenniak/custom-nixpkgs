@@ -1,0 +1,18 @@
+diff --color -U4 -r ./build-support/common-build-env.sh ./build-support/common-build-env.sh
+--- ./build-support/common-build-env.sh	2022-11-15 12:09:30.000000000 -0700
++++ ./build-support/common-build-env.sh	2023-01-16 08:55:58.555393381 -0700
+@@ -98,9 +98,13 @@
+ if [[ $YB_SRC_ROOT == */ ]]; then
+   fatal "YB_SRC_ROOT ends with '/' (not allowed): '$YB_SRC_ROOT'"
+ fi
+ 
+-initialize_yugabyte_bash_common
++# initialize_yugabyte_bash_common
++if [ -z ${YB_BASH_COMMON_DIR+x} ]; then
++  echo "YB_BASH_COMMON_DIR must be set"
++  exit 1
++fi
+ 
+ # shellcheck source=build/yugabyte-bash-common/src/yugabyte-bash-common.sh
+ . "$YB_BASH_COMMON_DIR/src/yugabyte-bash-common.sh"
+ 

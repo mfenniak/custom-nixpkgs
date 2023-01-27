@@ -1,0 +1,22 @@
+diff --git a/yb_build.sh b/yb_build.sh
+index 2c3de7ec0d..2624c9039b 100755
+--- a/yb_build.sh
++++ b/yb_build.sh
+@@ -14,6 +14,8 @@
+ #
+ set -euo pipefail
+ 
++set -x
++
+ script_name=${0##*/}
+ script_name=${script_name%.*}
+ 
+@@ -1609,7 +1611,7 @@ fi
+ # Done with cleaning, we can now download the third-party archive, determine toolchain, etc.
+ # -------------------------------------------------------------------------------------------------
+ 
+-find_or_download_ysql_snapshots
++# find_or_download_ysql_snapshots
+ activate_virtualenv
+ set_pythonpath
+ find_or_download_thirdparty
