@@ -10,6 +10,7 @@ let
     prometheus-podman-exporter = callPackage ./prometheus-podman-exporter.nix {};
     zinc = callPackage ./zinc/default.nix {};
     plasma-applet-display-profile-switcher = callPackage ./plasma-applet-display-profile-switcher.nix {};
+    dungeondraft = callPackage ./dungeondraft.nix {};
   };
 in
 self

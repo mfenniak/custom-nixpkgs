@@ -6,6 +6,7 @@
       csv-to-clipboard = self.callPackage ../csv-to-clipboard.nix {};
       prometheus-podman-exporter = self.callPackage ../prometheus-podman-exporter.nix {};
       plasma-applet-display-profile-switcher = self.callPackage ../plasma-applet-display-profile-switcher.nix {};
+      dungeondraft = self.callPackage ../dungeondraft.nix {};
     };
 
     nixosModules.prometheus-exporter-podman = { ... }: {
