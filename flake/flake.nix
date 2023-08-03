@@ -7,6 +7,7 @@
       prometheus-podman-exporter = self.callPackage ../prometheus-podman-exporter.nix {};
       plasma-applet-display-profile-switcher = self.callPackage ../plasma-applet-display-profile-switcher.nix {};
       dungeondraft = self.callPackage ../dungeondraft.nix {};
+      wonderdraft = self.callPackage ../wonderdraft.nix {};
     };
 
     nixosModules.prometheus-exporter-podman = { ... }: {
