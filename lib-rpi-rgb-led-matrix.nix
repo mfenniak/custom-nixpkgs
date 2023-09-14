@@ -14,7 +14,8 @@ stdenv.mkDerivation rec {
   patches = [
     # /proc/cpuinfo doesn't include "Revision" on NixOS on a RPI; I've patched DetermineRaspberryModel in this package
     # to force it to assume the system is a PI_MODEL_4 as a hack to get around this.
-    ./rpi-rgb-led-matrix-PI4.patch
+    # DISABLED: using https://github.com/NixOS/nixos-hardware/blob/master/raspberry-pi/4/cpu-revision.nix adds the revision to /proc/cpuinfo; better approach
+    # ./rpi-rgb-led-matrix-PI4.patch
   ];
 
   buildPhase = ''
