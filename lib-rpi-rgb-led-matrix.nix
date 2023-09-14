@@ -6,7 +6,7 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "hzeller";
-    repo = pname;
+    repo = "rpi-rgb-led-matrix";
     rev = version;
     sha256 = "sha256-IUP9mDdUrV8mkmA21VsjLKhbPtJZ4Ln2kcxPRgplbgs=";
   };
