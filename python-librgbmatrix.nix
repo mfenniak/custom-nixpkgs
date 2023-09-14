@@ -1,6 +1,6 @@
-{ buildPythonPackage, fetchFromGitHub, python3, lib-rpi-rgb-led-matrix }:
+{ fetchFromGitHub, python, lib-rpi-rgb-led-matrix }:
 
-buildPythonPackage rec {
+python.pkgs.buildPythonPackage rec {
   pname = "python-librgbmatrix";
   version = "a3eea997a9254b83ab2de97ae80d83588f696387";
   format = "setuptools";
@@ -16,7 +16,7 @@ buildPythonPackage rec {
 
   propagatedBuildInputs = [
     lib-rpi-rgb-led-matrix
-    python3.pkgs.pillow
+    python.pkgs.pillow
   ];
 
   postPatch = ''

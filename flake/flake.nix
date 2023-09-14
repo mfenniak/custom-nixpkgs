@@ -22,7 +22,7 @@
         lib-rpi-rgb-led-matrix = pkgs.callPackage ../lib-rpi-rgb-led-matrix.nix {};
         python-librgbmatrix = python: (pkgs.callPackage ../python-librgbmatrix.nix {
           inherit lib-rpi-rgb-led-matrix;
-          buildPythonPackage = python.pkgs.buildPythonPackage;
+          python = python;
         });
       };
 
