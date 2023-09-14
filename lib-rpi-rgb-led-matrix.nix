@@ -11,6 +11,12 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-IUP9mDdUrV8mkmA21VsjLKhbPtJZ4Ln2kcxPRgplbgs=";
   };
 
+  patches = [
+    # /proc/cpuinfo doesn't include "Revision" on NixOS on a RPI; I've patched DetermineRaspberryModel in this package
+    # to force it to assume the system is a PI_MODEL_4 as a hack to get around this.
+    ./rpi-rgb-led-matrix-PI4.patch
+  ];
+
   buildPhase = ''
     runHook preBuild
     make all

@@ -1,0 +1,54 @@
+diff --git a/lib/gpio.cc b/lib/gpio.cc
+index 0861482..1c41c7c 100644
+--- a/lib/gpio.cc
++++ b/lib/gpio.cc
+@@ -245,48 +245,7 @@ static int ReadFileToBuffer(char *buffer, size_t size, const char *filename) {
+ }
+ 
+ static RaspberryPiModel DetermineRaspberryModel() {
+-  char buffer[4096];
+-  if (ReadFileToBuffer(buffer, sizeof(buffer), "/proc/cpuinfo") < 0) {
+-    fprintf(stderr, "Reading cpuinfo: Could not determine Pi model\n");
+-    return PI_MODEL_3;  // safe guess fallback.
+-  }
+-  static const char RevisionTag[] = "Revision";
+-  const char *revision_key;
+-  if ((revision_key = strstr(buffer, RevisionTag)) == NULL) {
+-    fprintf(stderr, "non-existent Revision: Could not determine Pi model\n");
+-    return PI_MODEL_3;
+-  }
+-  unsigned int pi_revision;
+-  if (sscanf(index(revision_key, ':') + 1, "%x", &pi_revision) != 1) {
+-    fprintf(stderr, "Unknown Revision: Could not determine Pi model\n");
+-    return PI_MODEL_3;
+-  }
+-
+-  // https://www.raspberrypi.org/documentation/hardware/raspberrypi/revision-codes/README.md
+-  const unsigned pi_type = (pi_revision >> 4) & 0xff;
+-  switch (pi_type) {
+-  case 0x00: /* A */
+-  case 0x01: /* B, Compute Module 1 */
+-  case 0x02: /* A+ */
+-  case 0x03: /* B+ */
+-  case 0x05: /* Alpha ?*/
+-  case 0x06: /* Compute Module1 */
+-  case 0x09: /* Zero */
+-  case 0x0c: /* Zero W */
+-    return PI_MODEL_1;
+-
+-  case 0x04:  /* Pi 2 */
+-  case 0x12:  /* Zero W 2 (behaves close to Pi 2) */
+-    return PI_MODEL_2;
+-
+-  case 0x11: /* Pi 4 */
+-  case 0x13: /* Pi 400 */
+-  case 0x14: /* CM4 */
+-    return PI_MODEL_4;
+-
+-  default:  /* a bunch of versions representing Pi 3 */
+-    return PI_MODEL_3;
+-  }
++  return PI_MODEL_4;
+ }
+ 
+ static RaspberryPiModel GetPiModel() {
