@@ -11,6 +11,8 @@ let
     zinc = callPackage ./zinc/default.nix {};
     plasma-applet-display-profile-switcher = callPackage ./plasma-applet-display-profile-switcher.nix {};
     dungeondraft = callPackage ./dungeondraft.nix {};
+    lib-rpi-rgb-led-matrix = callPackage ./lib-rpi-rgb-led-matrix.nix {};
+    python-librgbmatrix = callPackage ./python-librgbmatrix.nix {};
   };
 in
 self
