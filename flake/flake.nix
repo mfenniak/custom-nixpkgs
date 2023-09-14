@@ -18,14 +18,12 @@
         wonderdraft = self.callPackage ../wonderdraft.nix {};
       };
 
-      packages = {
+      packages = rec {
         lib-rpi-rgb-led-matrix = pkgs.callPackage ../lib-rpi-rgb-led-matrix.nix {};
-
-        # FIXME: hard-coding the Python interpreter here doesn't seem like the right thing at all..
-        python-librgbmatrix = pkgs.callPackage ../python-librgbmatrix.nix {
-          buildPythonPackage = pkgs.python310.pkgs.buildPythonPackage;
-          lib-rpi-rgb-led-matrix = pkgs.callPackage ../lib-rpi-rgb-led-matrix.nix {};
-        };
+        python-librgbmatrix = python: (pkgs.callPackage ../python-librgbmatrix.nix {
+          inherit lib-rpi-rgb-led-matrix;
+          buildPythonPackage = python.pkgs.buildPythonPackage;
+        });
       };
 
       nixosModules.prometheus-exporter-podman = { ... }: {
