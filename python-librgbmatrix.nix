@@ -18,4 +18,8 @@ buildPythonPackage rec {
     lib-rpi-rgb-led-matrix
     python3.pkgs.pillow
   ];
+
+  postPatch = ''
+    echo "font_path = '${lib-rpi-rgb-led-matrix}/fonts'" >> rgbmatrix/__init__.py
+  '';
 }
