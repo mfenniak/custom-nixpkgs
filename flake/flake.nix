@@ -20,9 +20,14 @@
 
       packages = rec {
         lib-rpi-rgb-led-matrix = pkgs.callPackage ../lib-rpi-rgb-led-matrix.nix {};
+        python-bdfparser = python: (pkgs.callPackage ../python-bdfparser.nix {
+          inherit python;
+        });
+        python-rgbmatrixemulator = python: (pkgs.callPackage ../python-rgbmatrixemulator.nix {
+          inherit python python-bdfparser;
+        });
         python-librgbmatrix = python: (pkgs.callPackage ../python-librgbmatrix.nix {
-          inherit lib-rpi-rgb-led-matrix;
-          python = python;
+          inherit lib-rpi-rgb-led-matrix python;
         });
       };
 
