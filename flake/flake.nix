@@ -7,7 +7,7 @@
   };
 
   outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
+    (flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system}; in
     {
       overlays.default = self: super: {
@@ -30,7 +30,7 @@
           inherit lib-rpi-rgb-led-matrix python;
         });
       };
-    } // {
+    })) // {
       nixosModules.prometheus-exporter-podman = { ... }: {
         imports = [ ../prometheus/exporters.nix ];
       };
@@ -38,5 +38,5 @@
       nixosModules.detect-reboot-needed = { ... }: {
         imports = [ ../detect-reboot-needed.nix ];
       };
-    });
+    };
 }
