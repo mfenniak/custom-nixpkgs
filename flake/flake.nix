@@ -30,7 +30,7 @@
           inherit lib-rpi-rgb-led-matrix python;
         });
       };
-
+    } // {
       nixosModules.prometheus-exporter-podman = { ... }: {
         imports = [ ../prometheus/exporters.nix ];
       };
