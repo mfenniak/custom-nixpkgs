@@ -11,6 +11,7 @@
       let pkgs = nixpkgs.legacyPackages.${system}; in
     {
       packages = rec {
+        alertmanager-mqtt-bridge = pkgs.callPackage ../alertmanager-mqtt-bridge.nix {};
         lib-rpi-rgb-led-matrix = pkgs.callPackage ../lib-rpi-rgb-led-matrix.nix {};
         python-bdfparser = python: (pkgs.callPackage ../python-bdfparser.nix {
           inherit python;
@@ -24,6 +25,7 @@
       };
     })) // {
       overlays.default = self: super: {
+        alertmanager-mqtt-bridge = self.callPackage ../alertmanager-mqtt-bridge.nix {};
         csv-to-clipboard = self.callPackage ../csv-to-clipboard.nix {};
         prometheus-podman-exporter = self.callPackage ../prometheus-podman-exporter.nix {};
         plasma-applet-display-profile-switcher = self.callPackage ../plasma-applet-display-profile-switcher.nix {};
