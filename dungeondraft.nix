@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
   # nix-store --add-fixed sha256 Dungeondraft-1.1.0.5-Linux64.deb
   src = requireFile {
     name = "Dungeondraft-${version}-Linux64.deb";
-    sha256 = "1ibijnww135y1y6mjfb4kpcblynplmdkgq6ql80aimsxn7w2fhkm";
+    sha256 = "12x6a3rrghkznjyl86parq9hiw2vh4k5czk20032bdv7glkxwlan";
     url = "https://dungeondraft.net/";
   };
 
