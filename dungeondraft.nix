@@ -22,9 +22,9 @@
 
 stdenv.mkDerivation rec {
   pname = "dungeondraft";
-  version = "1.0.4.7";
+  version = "1.1.0.5";
 
-  # nix-store --add-fixed sha256 Dungeondraft-1.0.4.7-Linux64.deb
+  # nix-store --add-fixed sha256 Dungeondraft-1.1.0.5-Linux64.deb
   src = requireFile {
     name = "Dungeondraft-${version}-Linux64.deb";
     sha256 = "1ibijnww135y1y6mjfb4kpcblynplmdkgq6ql80aimsxn7w2fhkm";
