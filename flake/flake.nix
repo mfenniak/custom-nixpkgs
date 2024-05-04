@@ -22,6 +22,14 @@
         python-librgbmatrix = python: (pkgs.callPackage ../python-librgbmatrix.nix {
           inherit lib-rpi-rgb-led-matrix python;
         });
+        multicorn2 = postgresql: python: (pkgs.callPackage ../multicorn2.nix {
+          inherit postgresql;
+          inherit python;
+        }).package;
+        multicorn2Python = postgresql: python: (pkgs.callPackage ../multicorn2.nix {
+          inherit postgresql;
+          inherit python;
+        }).pythonPackage;
       };
     })) // {
       overlays.default = self: super: {
