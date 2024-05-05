@@ -21,6 +21,10 @@ let
     version = targetVersion;
     src = multicornSrc;
     buildInputs = postgresql.buildInputs ++ [ postgresql python ];
+    patches = [
+      # Until upstreamed (https://github.com/pgsql-io/multicorn2/pull/41), this fixes https://github.com/mfenniak/dynamodb_fdw/issues/14.
+      ./multicorn2-PR-41-2024-05-04.patch
+    ];
     installPhase = ''
       runHook preInstall
       install -D multicorn${postgresql.dlSuffix} -t $out/lib/
