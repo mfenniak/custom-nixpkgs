@@ -24,11 +24,11 @@
         });
         multicorn2 = postgresql: python: (pkgs.callPackage ../multicorn2.nix {
           inherit postgresql;
-          inherit python;
+          python3 = python;
         }).package;
         multicorn2Python = postgresql: python: (pkgs.callPackage ../multicorn2.nix {
           inherit postgresql;
-          inherit python;
+          python3 = python;
         }).pythonPackage;
       };
     })) // {

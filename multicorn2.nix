@@ -3,28 +3,26 @@
   , fetchFromGitHub
   , postgresql
   , postgresqlTestHook
-  , python
+  , python3
 }:
 
 let
+  # Until https://github.com/pgsql-io/multicorn2/pull/41 is released, we build a pre-release version...
   targetVersion = "v2.5";
+  targetRevision = "2c3d0c00caf4aa72fccb28f1924e06bfbffe1af4";
 
   multicornSrc = fetchFromGitHub {
     owner = "pgsql-io";
     repo = "multicorn2";
-    rev = targetVersion;
-    sha256 = "sha256-4fJ79zZIJbpTya/px4FG3tWnedQF5/0hlaJX+6BWcls=";
+    rev = targetRevision;
+    sha256 = "sha256-wQQwCdHVclSKqQeSfDM9em3kWWLCYLgQCXSpq5Rhf2E=";
   };
 
   multicorn = stdenv.mkDerivation rec {
     pname = "multicorn2";
     version = targetVersion;
     src = multicornSrc;
-    buildInputs = postgresql.buildInputs ++ [ postgresql python ];
-    patches = [
-      # Until upstreamed (https://github.com/pgsql-io/multicorn2/pull/41), this fixes https://github.com/mfenniak/dynamodb_fdw/issues/14.
-      ./multicorn2-PR-41-2024-05-04.patch
-    ];
+    buildInputs = postgresql.buildInputs ++ [ postgresql python3 ];
     installPhase = ''
       runHook preInstall
       install -D multicorn${postgresql.dlSuffix} -t $out/lib/
@@ -50,7 +48,7 @@ let
     installPhase = "touch $out";
   };
 
-  multicornPython = python.pkgs.buildPythonPackage rec {
+  multicornPython = python3.pkgs.buildPythonPackage rec {
     pname = "multicorn2-python";
     version = targetVersion;
     src = multicornSrc;
@@ -64,7 +62,7 @@ let
     buildInputs = [ postgresqlTestHook ];
     nativeCheckInputs = [
       (postgresql.withPackages (ps: [ multicorn ]))
-      (python.withPackages (ps: [ multicornPython ]))
+      (python3.withPackages (ps: [ multicornPython ]))
     ];
     postgresqlTestUserOptions = "LOGIN SUPERUSER";
     failureHook = "postgresqlStop";
