@@ -78,8 +78,7 @@ let
           test1 character varying,
           test2 character varying
       ) server multicorn_srv options (
-          option1 'option1',
-          test_type 'logger'
+          option1 'option1'
       );"
       psql -a -v ON_ERROR_STOP=1 -c "select * from testmulticorn;"
       psql -a -v ON_ERROR_STOP=1 -c "DROP EXTENSION multicorn cascade;"
