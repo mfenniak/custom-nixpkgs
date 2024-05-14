@@ -7,15 +7,14 @@
 }:
 
 let
-  # Until https://github.com/pgsql-io/multicorn2/pull/41 is released, we build a pre-release version...
-  targetVersion = "v2.5";
-  targetRevision = "2c3d0c00caf4aa72fccb28f1924e06bfbffe1af4";
+  targetVersion = "v3.0";
+  targetRevision = "7933b5ffbd2ffb3d5e53d6ac29c20b7d2a0921b2"; # FIXME Note: pre-release version, not a tag, so not truly v3.0
 
   multicornSrc = fetchFromGitHub {
     owner = "pgsql-io";
     repo = "multicorn2";
     rev = targetRevision;
-    sha256 = "sha256-wQQwCdHVclSKqQeSfDM9em3kWWLCYLgQCXSpq5Rhf2E=";
+    sha256 = "sha256-o06YV+PHNZtRCNesHGT7L2cSIT2LBRRtLmI9cmVkh2I=";
   };
 
   multicorn = stdenv.mkDerivation rec {
