@@ -8,13 +8,13 @@
 
 let
   targetVersion = "v3.0";
-  targetRevision = "35a2913986d6b94545ad7936801efee9fbb17821"; # FIXME Note: pre-release version, not a tag, so not truly v3.0
+  targetRevision = "d75e4e460b8d6962df3d6d8bc703dac4e4c68e56"; # FIXME Note: pre-release version, not a tag, so not truly v3.0
 
   multicornSrc = fetchFromGitHub {
-    owner = "pgsql-io";
+    owner = "mfenniak";
     repo = "multicorn2";
     rev = targetRevision;
-    sha256 = "sha256-NeIDzScMlsc3LMSroyOpmmTMCZwJJj1bz3dqgZ11Czw=";
+    sha256 = "sha256-n3dNB3ilGRLtosrP9w52z71QcQNtbEQ4+OyvOKQmr0I=";
   };
 
   multicorn = stdenv.mkDerivation rec {
