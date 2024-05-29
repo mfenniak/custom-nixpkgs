@@ -8,13 +8,13 @@
 
 let
   targetVersion = "v3.0";
-  targetRevision = "d75e4e460b8d6962df3d6d8bc703dac4e4c68e56"; # FIXME Note: pre-release version, not a tag, so not truly v3.0
+  targetRevision = "aebb975d6081ea74310eed88503f8c8f26a6d41c"; # FIXME Note: pre-release version, not a tag, so not truly v3.0
 
   multicornSrc = fetchFromGitHub {
     owner = "mfenniak";
     repo = "multicorn2";
     rev = targetRevision;
-    sha256 = "sha256-n3dNB3ilGRLtosrP9w52z71QcQNtbEQ4+OyvOKQmr0I=";
+    sha256 = "sha256-1RJIq+2B6+zRPILnKwTkkqPEEBS0dcU7ywP8uCqodpE=";
   };
 
   multicorn = stdenv.mkDerivation rec {
