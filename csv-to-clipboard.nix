@@ -19,7 +19,7 @@ pkgs.rustPlatform.buildRustPackage rec {
     sha256 = "sha256-Aag741LAD/C7ajJmIs7bsCMg2mPfkYVIAdJ71ZIlAog=";
   };
 
-  cargoSha256 = "sha256-6TNgMnVjfx/LLNkOwUx6Gs4x/fTFa5fw+CrhWv2vNFE=";
+  cargoHash = "sha256-6TNgMnVjfx/LLNkOwUx6Gs4x/fTFa5fw+CrhWv2vNFE=";
 
   nativeBuildInputs = [
     pkgs.python310
