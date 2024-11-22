@@ -17,7 +17,7 @@
 , libkrb5
 , udev
 , makeWrapper
-, gnome
+, zenity
 , alsa-lib
 , libpulseaudio
 }:
@@ -79,7 +79,7 @@ stdenv.mkDerivation rec {
     # Can't use wrapProgram because godot seems to load data files based upon executable name
     makeWrapper $out/opt/Wonderdraft/Wonderdraft.x86_64 $out/opt/Wonderdraft/Wonderdraft.x86_64.wrapped \
       --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ udev ]} \
-      --prefix PATH : ${lib.makeBinPath [ gnome.zenity ]}
+      --prefix PATH : ${lib.makeBinPath [ zenity ]}
 
     mkdir -p $out/share/applications
     mv usr/share/applications/* $out/share/applications
