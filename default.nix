@@ -14,6 +14,7 @@ let
     dungeondraft = callPackage ./dungeondraft.nix {};
     lib-rpi-rgb-led-matrix = callPackage ./lib-rpi-rgb-led-matrix.nix {};
     python-librgbmatrix = callPackage ./python-librgbmatrix.nix {};
+    dotnet-symbol = callPackage ./dotnet-symbol.nix {};
   };
 in
 self

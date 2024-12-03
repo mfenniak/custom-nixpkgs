@@ -30,6 +30,7 @@
           inherit postgresql;
           python3 = python;
         }).pythonPackage;
+        dotnet-symbol = pkgs.callPackage ../dotnet-symbol.nix {};
       };
     })) // {
       overlays.default = self: super: {
@@ -39,6 +40,7 @@
         plasma-applet-display-profile-switcher = self.callPackage ../plasma-applet-display-profile-switcher.nix {};
         dungeondraft = self.callPackage ../dungeondraft.nix {};
         wonderdraft = self.callPackage ../wonderdraft.nix {};
+        dotnet-symbol = self.callPackage ../dotnet-symbol.nix {};
       };
 
       nixosModules.prometheus-exporter-podman = { ... }: {
