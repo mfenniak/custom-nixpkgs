@@ -22,6 +22,8 @@ stdenv.mkDerivation rec {
     runHook preBuild
     make all
     runHook postBuild
+
+    find /homeless-shelter || true
   '';
 
   installPhase = ''
@@ -47,5 +49,7 @@ stdenv.mkDerivation rec {
     cp fonts/* $out/fonts/
 
     runHook postInstall
+
+    find /homeless-shelter || true
   '';
 }
