@@ -50,6 +50,17 @@ stdenv.mkDerivation rec {
 
     runHook postInstall
 
+    echo "/homeless-shelter should be empty..."
     find /homeless-shelter || true
+    echo "Removing anything just in case."
+    rm -rf /homeless-shelter
   '';
+
+  # These outputs don't seem relevant to this package?  So I'm a bit confused how they're here.
+  # lib-rpi-rgb-led-matrix-a3eea997a9254b83ab2de97ae80d83588f696387> /homeless-shelter
+  # lib-rpi-rgb-led-matrix-a3eea997a9254b83ab2de97ae80d83588f696387> /homeless-shelter/.cache
+  # lib-rpi-rgb-led-matrix-a3eea997a9254b83ab2de97ae80d83588f696387> /homeless-shelter/.cache/matplotlib
+  # lib-rpi-rgb-led-matrix-a3eea997a9254b83ab2de97ae80d83588f696387> /homeless-shelter/.cache/matplotlib/fontlist-v390.json
+  # lib-rpi-rgb-led-matrix-a3eea997a9254b83ab2de97ae80d83588f696387> /homeless-shelter/.config
+  # lib-rpi-rgb-led-matrix-a3eea997a9254b83ab2de97ae80d83588f696387> /homeless-shelter/.config/matplotlib
 }
