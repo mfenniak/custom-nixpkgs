@@ -4,6 +4,7 @@
   , postgresql
   , postgresqlTestHook
   , python3
+  , clang
 }:
 
 let
@@ -21,7 +22,11 @@ let
     pname = "multicorn2";
     version = targetVersion;
     src = multicornSrc;
-    buildInputs = postgresql.buildInputs ++ [ postgresql python3 ];
+    nativeBuildInputs = [
+      postgresql.pg_config
+      python3
+      clang
+    ];
     installPhase = ''
       runHook preInstall
       install -D multicorn${postgresql.dlSuffix} -t $out/lib/
@@ -51,7 +56,7 @@ let
     pname = "multicorn2-python";
     version = targetVersion;
     src = multicornSrc;
-    nativeBuildInputs = [ postgresql ];
+    nativeBuildInputs = [ postgresql.pg_config ];
   };
 
   multicornPythonTest = stdenv.mkDerivation {
