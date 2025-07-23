@@ -1,1 +1,1 @@
-Nix packaging for [csv-to-clipboard](https://github.com/mfenniak/csv-to-clipboard).
+Nix packaging for some random things.
