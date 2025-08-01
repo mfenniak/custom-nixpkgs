@@ -58,7 +58,7 @@ let
     src = multicornSrc;
     nativeBuildInputs = [ postgresql.pg_config ];
     pyproject = true;
-    build-system = [ python3Packages.setuptools ];
+    build-system = [ python3.pkgs.setuptools ];
   };
 
   multicornPythonTest = stdenv.mkDerivation {
